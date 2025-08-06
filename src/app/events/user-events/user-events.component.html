@@ -19,6 +19,10 @@
       <p>Fecha: {{ event.date_time | date : "longDate" }}</p>
       <p>Lugar: {{ event.location }}</p>
       <p>Con stands/feria de emprendedores: {{ event.has_fair_text }}</p>
+
+      <button [routerLink]="['/event-detail', event.id]">Ver Detalles</button>
+      <button [routerLink]="['/event-form', event.id]">Editar</button>
+      <button (click)="deleteEvent(event.id)">Eliminar</button>
     </div>
   </div>
 

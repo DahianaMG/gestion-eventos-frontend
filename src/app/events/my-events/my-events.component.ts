@@ -32,4 +32,19 @@ export class MyEventsComponent implements OnInit {
       }
     });
   }
+
+  deleteEvent(id: number): void {
+    if (confirm('¿Estás seguro de que querés eliminar este evento?')) {
+      this.eventService.deleteEvent(id).subscribe({
+        next: () => {
+          this.events = this.events.filter(event => event.id !== id);
+          alert('Evento eliminado correctamente.');
+        },
+        error: (err) => {
+          console.error('Error al eliminar evento:', err);
+          alert('Hubo un error al intentar eliminar el evento.');
+        }
+      });
+    }
+  }
 }
