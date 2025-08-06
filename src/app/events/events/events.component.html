@@ -1,0 +1,28 @@
+<h1>{{ title }}</h1>
+
+<div *ngIf="isLoading">Cargando eventos...</div>
+
+<div *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="!isLoading && !errorMessage">
+  <h2>Próximos Eventos</h2>
+
+  <div *ngIf="events.length > 0; else noEvents">
+    <div
+      *ngFor="let event of events"
+      style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px"
+    >
+      <h3>{{ event.title }}</h3>
+      <p>{{ event.description }}</p>
+      <p>Fecha: {{ event.date_time | date : "longDate" }}</p>
+      <p>Lugar: {{ event.location }}</p>
+      <p>Con stands/feria de emprendedores: {{ event.has_fair_text }}</p>
+    </div>
+  </div>
+
+  <ng-template #noEvents>
+    <p>No hay eventos disponibles.</p>
+  </ng-template>
+</div>

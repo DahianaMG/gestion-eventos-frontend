@@ -1,0 +1,102 @@
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h2 class="card-title text-center mb-4">
+        {{ isEditMode ? "Editar Evento" : "Crear Nuevo Evento" }}
+      </h2>
+
+      <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="title" class="form-label">Título</label>
+          <input
+            id="title"
+            formControlName="title"
+            type="text"
+            class="form-control"
+            [class.is-invalid]="
+              eventForm.get('title')?.invalid && eventForm.get('title')?.touched
+            "
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Descripción</label>
+          <textarea
+            id="description"
+            formControlName="description"
+            class="form-control"
+            rows="3"
+            [class.is-invalid]="
+              eventForm.get('description')?.invalid &&
+              eventForm.get('description')?.touched
+            "
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="date_time" class="form-label">Fecha y hora</label>
+          <input
+            id="date_time"
+            formControlName="date_time"
+            type="datetime-local"
+            class="form-control"
+            [class.is-invalid]="
+              eventForm.get('date_time')?.invalid &&
+              eventForm.get('date_time')?.touched
+            "
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="location" class="form-label">Ubicación</label>
+          <input
+            id="location"
+            formControlName="location"
+            type="text"
+            class="form-control"
+            [class.is-invalid]="
+              eventForm.get('location')?.invalid &&
+              eventForm.get('location')?.touched
+            "
+          />
+        </div>
+
+        <div class="form-check mb-3">
+          <input
+            id="has_fair"
+            formControlName="has_fair"
+            type="checkbox"
+            class="form-check-input"
+          />
+          <label for="has_fair" class="form-check-label">
+            ¿Tiene feria de emprendedores?
+          </label>
+        </div>
+
+        <div class="mb-3">
+          <label for="capacity" class="form-label">Capacidad</label>
+          <input
+            id="capacity"
+            formControlName="capacity"
+            type="number"
+            class="form-control"
+            [class.is-invalid]="
+              eventForm.get('capacity')?.invalid &&
+              eventForm.get('capacity')?.touched
+            "
+          />
+        </div>
+
+        <div class="d-grid">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="eventForm.invalid"
+          >
+            {{ isEditMode ? "Actualizar" : "Crear" }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<h1>Detalles del Evento</h1>
+
+<div *ngIf="isLoading">Cargando evento...</div>
+
+<div *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="!isLoading && !errorMessage && event">
+  <h2>{{ event.title }}</h2>
+  <p><strong>Descripción:</strong> {{ event.description }}</p>
+  <p>
+    <strong>Fecha y hora:</strong> {{ event.date_time | date : "longDate" }}
+  </p>
+  <p><strong>Lugar:</strong> {{ event.location }}</p>
+  <p><strong>Capacidad:</strong> {{ event.capacity }}</p>
+  <p><strong>Con feria de emprendedores:</strong> {{ event.has_fair_text }}</p>
+
+  <div *ngIf="event.schedules?.length">
+    <h3>Actividades:</h3>
+    <ul>
+      <li *ngFor="let schedule of event.schedules">
+        {{ schedule.activity_name }}:
+        {{ schedule.start_time | date : "shortTime" }} -
+        {{ schedule.end_time | date : "shortTime" }}
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="event.vendors?.length">
+    <h3>Emprendedores/stands:</h3>
+    <ul>
+      <li *ngFor="let vendor of event.vendors">
+        <strong>{{ vendor.stand_name }}</strong
+        >: {{ vendor.stand_description }}
+      </li>
+    </ul>
+  </div>
+</div>

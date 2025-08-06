@@ -1,14 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EventsComponent } from './events/events.component';
+import { EventsComponent } from './events/events/events.component';
+import { EventDetailComponent } from './events/event-detail/event-detail.component';
+import { EventFormComponent } from './events/event-form/event-form.component';
+import { MyEventsComponent } from './events/my-events/my-events.component';
+import { UserEventsComponent } from './events/user-events/user-events.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/events', pathMatch: 'full' },
+  { path: '', redirectTo: 'events', pathMatch: 'full' },
+
+  //Events
   { path: 'events', component: EventsComponent },
-  //{ path: 'event/:id', component: EventComponent },
+  { path: 'event/:id', component: EventDetailComponent },
+  { path: 'create-event', component: EventFormComponent },
+  { path: 'edit-event/:id', component: EventFormComponent },
+  { path: 'my-events', component: MyEventsComponent },
+  { path: 'user-events/:id', component: UserEventsComponent },
   //{ path: 'register', component: RegisterComponent },
   //{ path: 'login', component: LoginComponent },
-  //{ path: '**', component: HomeComponent }
+
+  { path: '**', component: EventsComponent }
 ];
 
 @NgModule({
