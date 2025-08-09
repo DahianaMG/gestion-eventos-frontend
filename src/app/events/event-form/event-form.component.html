@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <div class="card shadow-sm">
+  <div class="card border-primary shadow-sm">
     <div class="card-body">
       <h2 class="card-title text-center mb-4">
         {{ isEditMode ? "Editar Evento" : "Crear Nuevo Evento" }}
@@ -12,7 +12,7 @@
             id="title"
             formControlName="title"
             type="text"
-            class="form-control"
+            class="form-control bg-primary"
             [class.is-invalid]="
               eventForm.get('title')?.invalid && eventForm.get('title')?.touched
             "
@@ -24,7 +24,7 @@
           <textarea
             id="description"
             formControlName="description"
-            class="form-control"
+            class="form-control bg-primary"
             rows="3"
             [class.is-invalid]="
               eventForm.get('description')?.invalid &&
@@ -39,7 +39,7 @@
             id="date_time"
             formControlName="date_time"
             type="datetime-local"
-            class="form-control"
+            class="form-control bg-primary"
             [class.is-invalid]="
               eventForm.get('date_time')?.invalid &&
               eventForm.get('date_time')?.touched
@@ -53,7 +53,7 @@
             id="location"
             formControlName="location"
             type="text"
-            class="form-control"
+            class="form-control bg-primary"
             [class.is-invalid]="
               eventForm.get('location')?.invalid &&
               eventForm.get('location')?.touched
@@ -66,7 +66,7 @@
             id="has_fair"
             formControlName="has_fair"
             type="checkbox"
-            class="form-check-input"
+            class="form-check-input bg-primary"
           />
           <label for="has_fair" class="form-check-label">
             ¿Tiene feria de emprendedores?
@@ -79,7 +79,7 @@
             id="capacity"
             formControlName="capacity"
             type="number"
-            class="form-control"
+            class="form-control bg-primary"
             [class.is-invalid]="
               eventForm.get('capacity')?.invalid &&
               eventForm.get('capacity')?.touched
@@ -87,10 +87,10 @@
           />
         </div>
 
-        <div class="d-grid">
+        <div class="text-center">
           <button
             type="submit"
-            class="btn btn-primary"
+            class="btn btn-info"
             [disabled]="eventForm.invalid"
           >
             {{ isEditMode ? "Actualizar" : "Crear" }}

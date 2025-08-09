@@ -10,6 +10,8 @@ import { EventFormComponent } from './events/event-form/event-form.component';
 import { MyEventsComponent } from './events/my-events/my-events.component';
 import { UserEventsComponent } from './events/user-events/user-events.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HeaderComponent } from './ui/header/header.component';
+import { FooterComponent } from './ui/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     EventDetailComponent,
     EventFormComponent,
     MyEventsComponent,
-    UserEventsComponent
+    UserEventsComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

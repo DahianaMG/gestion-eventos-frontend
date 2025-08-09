@@ -1,0 +1,9 @@
+@media (max-width: 768px) {
+  .card .card-img-overlay {
+    position: static !important;
+    padding: 1rem;
+  }
+  .card .card-img {
+    height: auto;
+  }
+}

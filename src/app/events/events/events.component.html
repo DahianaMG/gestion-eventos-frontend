@@ -1,6 +1,35 @@
 <h1>{{ title }}</h1>
 
-<div *ngIf="isLoading">Cargando eventos...</div>
+<div class="card border-info text-bg-dark mb-3">
+  <img
+    srcset="
+      assets/images/banner-sm.webp 1280w,
+      assets/images/banner-md.webp 1920w,
+      assets/images/banner-lg.webp 3840w
+    "
+    sizes="(max-width: 1280px) 1280px, (max-width: 1920px) 1920px, 3840px"
+    src="assets/images/banner-md.webp"
+    class="card-img"
+    alt="..."
+  />
+  <div class="card-img-overlay">
+    <h5 class="card-title">Tu portal a los eventos otaku</h5>
+    <p class="card-text">
+      Descubre, crea y vive eventos llenos de anime, cosplay, emprendimientos y
+      cultura japonesa. Conecta con otros fans, participa en actividades únicas
+      y apoya a los mejores talentos de la comunidad.
+    </p>
+    <p class="card-text">
+      <small>一緒に楽しもう</small>
+    </p>
+  </div>
+</div>
+
+<div *ngIf="isLoading">
+  <div class="spinner-border text-info" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
 
 <div *ngIf="errorMessage">
   {{ errorMessage }}
@@ -9,20 +38,35 @@
 <div *ngIf="!isLoading && !errorMessage">
   <h2>Próximos Eventos</h2>
 
-  <div *ngIf="events.length > 0; else noEvents">
-    <div
-      *ngFor="let event of events"
-      style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px"
-    >
-      <h3>{{ event.title }}</h3>
-      <p>{{ event.description }}</p>
-      <p>Fecha: {{ event.date_time | date : "longDate" }}</p>
-      <p>Lugar: {{ event.location }}</p>
-      <p>Con stands/feria de emprendedores: {{ event.has_fair_text }}</p>
+  <div class="row g-4" *ngIf="events.length > 0; else noEvents">
+    <div class="col-sm-12 col-md-6 text-center" *ngFor="let event of events">
+      <div class="card border-primary bg-black">
+        <img src="..." class="card-img-top bg-primary" alt="..." />
+        <h3 class="card-header bg-primary">{{ event.title }}</h3>
+        <div class="card-body">
+          <p class="card-text">{{ event.description }}</p>
+          <p class="card-text">
+            Fecha: {{ event.date_time | date : "longDate" }}
+          </p>
+          <p class="card-text">Lugar: {{ event.location }}</p>
+          <p class="card-text">
+            Con stands/feria de emprendedores: {{ event.has_fair_text }}
+          </p>
 
-      <button [routerLink]="['/event-detail', event.id]">Ver Detalles</button>
-      <button [routerLink]="['/event-form', event.id]">Editar</button>
-      <button (click)="deleteEvent(event.id)">Eliminar</button>
+          <button class="btn btn-info mx-1" [routerLink]="['/event', event.id]">
+            Ver Detalles
+          </button>
+          <button
+            class="btn btn-info mx-1"
+            [routerLink]="['/edit-event', event.id]"
+          >
+            Editar
+          </button>
+          <button class="btn btn-info mx-1" (click)="deleteEvent(event.id)">
+            Eliminar
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 

@@ -1,39 +1,68 @@
 <h1>Detalles del Evento</h1>
 
-<div *ngIf="isLoading">Cargando evento...</div>
+<div *ngIf="isLoading">
+  <div class="spinner-border text-info" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
 
 <div *ngIf="errorMessage">
   {{ errorMessage }}
 </div>
 
-<div *ngIf="!isLoading && !errorMessage && event">
-  <h2>{{ event.title }}</h2>
-  <p><strong>Descripción:</strong> {{ event.description }}</p>
-  <p>
-    <strong>Fecha y hora:</strong> {{ event.date_time | date : "longDate" }}
-  </p>
-  <p><strong>Lugar:</strong> {{ event.location }}</p>
-  <p><strong>Capacidad:</strong> {{ event.capacity }}</p>
-  <p><strong>Con feria de emprendedores:</strong> {{ event.has_fair_text }}</p>
-
-  <div *ngIf="event.schedules?.length">
-    <h3>Actividades:</h3>
-    <ul>
-      <li *ngFor="let schedule of event.schedules">
-        {{ schedule.activity_name }}:
-        {{ schedule.start_time | date : "shortTime" }} -
-        {{ schedule.end_time | date : "shortTime" }}
-      </li>
-    </ul>
+<div class="container text-center" *ngIf="!isLoading && !errorMessage && event">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card border-primary bg-black mb-3">
+        <img src="..." class="card-img-top bg-primary" alt="..." />
+        <h2 class="card-header bg-primary">{{ event.title }}</h2>
+        <div class="card-body">
+          <p class="card-text">
+            <strong>Descripción:</strong> {{ event.description }}
+          </p>
+          <p class="card-text">
+            <strong>Fecha y hora:</strong>
+            {{ event.date_time | date : "longDate" }}
+          </p>
+          <p class="card-text"><strong>Lugar:</strong> {{ event.location }}</p>
+          <p class="card-text">
+            <strong>Capacidad:</strong> {{ event.capacity }}
+          </p>
+          <p class="card-text">
+            <strong>Con feria de emprendedores:</strong>
+            {{ event.has_fair_text }}
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div *ngIf="event.vendors?.length">
-    <h3>Emprendedores/stands:</h3>
-    <ul>
-      <li *ngFor="let vendor of event.vendors">
-        <strong>{{ vendor.stand_name }}</strong
-        >: {{ vendor.stand_description }}
-      </li>
-    </ul>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card border-info bg-black mb-3">
+        <h3 class="card-header bg-info">Actividades:</h3>
+        <div class="card-body">
+          <p class="card-text" *ngFor="let schedule of event.schedules">
+            {{ schedule.activity_name }}:
+            {{ schedule.start_time | date : "shortTime" }} -
+            {{ schedule.end_time | date : "shortTime" }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card border-info bg-black mb-3">
+        <h3 class="card-header bg-info">Emprendedores/stands:</h3>
+        <div class="card-body">
+          <p class="card-text" *ngFor="let vendor of event.vendors">
+            <strong>{{ vendor.stand_name }}</strong
+            >: {{ vendor.stand_description }}
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

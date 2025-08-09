@@ -1,1 +1,46 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  background-color: #000;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bs-primary: #ff0080;
+  --bs-primary-rgb: 255, 0, 128;
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: #e00078;
+  --bs-btn-hover-border-color: #e00078;
+  --bs-btn-active-bg: #cf0370;
+  --bs-btn-active-border-color: #cf0370;
+}
+
+:root {
+  --bs-info: #00a2ff;
+  --bs-info-rgb: 0, 162, 255;
+  --bs-btn-bg: var(--bs-info);
+  --bs-btn-border-color: var(--bs-info);
+}
+
+.btn-info {
+  color: #fff;
+  background-color: #00a2ff;
+  --bs-btn-hover-bg: #0082ce;
+  --bs-btn-hover-border-color: #0082ce;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-bg: #006ace;
+  --bs-btn-active-border-color: #006ace;
+}
+
+.nav-link {
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #fff;
+  text-shadow: 0 0 5px #00aaff, 0 0 10px #00aaff;
+  transition: text-shadow 0.3s ease;
+}

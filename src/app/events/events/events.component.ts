@@ -8,7 +8,7 @@ import { EventService } from '../../services/event.service';
   styleUrls: ['./events.component.css']
 })
 export class EventsComponent implements OnInit {
-  title = 'Listado de eventos anime';
+  title = '¡Bienvenido!';
   events: any[] = [];
   isLoading: boolean = true;
   errorMessage: string | null = null;
