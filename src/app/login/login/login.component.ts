@@ -11,7 +11,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  errorMessage: string = '';
+  errorMessage: string | null = null;
+  successMessage: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -23,6 +24,13 @@ export class LoginComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
+  }
+
+  ngOnInit(): void {
+    this.successMessage = localStorage.getItem('successMessage');
+    if (this.successMessage) {
+      localStorage.removeItem('successMessage');
+    }
   }
 
   onSubmit() {

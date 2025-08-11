@@ -39,7 +39,8 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       this.authService.register(this.registerForm.value).subscribe({
         next: () => {
-          this.router.navigate(['/events']);
+          localStorage.setItem('successMessage', 'Cuenta creada con éxito. Inicie sesión.');
+          this.router.navigate(['/login']);
         },
         error: err => {
           console.error('Error en registro', err);

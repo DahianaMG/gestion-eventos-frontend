@@ -1,6 +1,10 @@
 <div class="container">
   <div class="card border-primary shadow-sm">
     <div class="card-body">
+      <div *ngIf="successMessage" class="alert success-message">
+        {{ successMessage }}
+      </div>
+
       <h2 class="card-title text-center mb-4">Iniciar sesión</h2>
 
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
