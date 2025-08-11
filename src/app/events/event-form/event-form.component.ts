@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../services/event.service';
 
@@ -23,12 +23,12 @@ export class EventFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventForm = this.fb.group({
-      title: ['', Validators.required],
+      title: ['', [Validators.required, Validators.maxLength(150)]],
       description: ['', Validators.required],
-      date_time: ['', Validators.required],
-      location: ['', Validators.required],
+      date_time: ['', [Validators.required, this.futureDateValidator]],
+      location: ['', [Validators.required, Validators.maxLength(150)]],
       has_fair: [false],
-      capacity: [0, [Validators.required, Validators.min(1)]],
+      capacity: [0, [Validators.required, Validators.min(1), Validators.pattern(/^\d+$/)]],
     });
 
     this.eventId = Number(this.route.snapshot.paramMap.get('id'));
@@ -46,6 +46,19 @@ export class EventFormComponent implements OnInit {
     }
   }
 
+  futureDateValidator(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (!value) return null;
+
+    const selectedDate = new Date(value);
+    const now = new Date();
+
+    if (selectedDate <= now) {
+      return { notFutureDate: true };
+    }
+    return null;
+  }
+
   onSubmit(): void {
     if (this.eventForm.invalid) return;
 
@@ -54,8 +67,8 @@ export class EventFormComponent implements OnInit {
     if (this.isEditMode) {
       this.eventService.updateEvent(this.eventId, eventData).subscribe({
         next: () => {
-          alert('Evento actualizado con éxito');
-          this.router.navigate(['/events']);
+          localStorage.setItem('successMessage', 'Evento actualizado con éxito');
+          this.router.navigate(['/my-events']);
         },
         error: (err) => {
           console.error('Error al actualizar', err);
@@ -64,8 +77,8 @@ export class EventFormComponent implements OnInit {
     } else {
       this.eventService.createEvent(eventData).subscribe({
         next: () => {
-          alert('Evento creado con éxito');
-          this.router.navigate(['/events']);
+          localStorage.setItem('successMessage', 'Evento creado con éxito');
+          this.router.navigate(['/my-events']);
         },
         error: (err) => {
           console.error('Error al crear evento', err);

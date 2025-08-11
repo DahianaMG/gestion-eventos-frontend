@@ -24,6 +24,10 @@ body {
   --bs-btn-border-color: var(--bs-info);
 }
 
+.btn-outline-light {
+  --bs-btn-hover-color: #ff0080;
+}
+
 .btn-info {
   color: #fff;
   background-color: #00a2ff;
@@ -32,6 +36,11 @@ body {
   --bs-btn-hover-color: #fff;
   --bs-btn-active-bg: #006ace;
   --bs-btn-active-border-color: #006ace;
+}
+
+.btn-info:disabled,
+.btn-info.disabled {
+  color: #fff !important;
 }
 
 .nav-link {
@@ -43,4 +52,32 @@ body {
   color: #fff;
   text-shadow: 0 0 5px #00aaff, 0 0 10px #00aaff;
   transition: text-shadow 0.3s ease;
+}
+
+.error-message {
+  animation: fadePulse 1.5s ease-in-out infinite;
+  background-image: url("/assets/images/warning.png");
+  background-size: 100% 100%;
+  background-position: center;
+  color: rgb(255, 217, 0);
+}
+
+.success-message {
+  animation: fadePulse 1.5s ease-in-out infinite;
+  background-image: url("/assets/images/success.png");
+  background-size: 100% 100%;
+  background-position: center;
+  color: rgb(136, 255, 0);
+}
+
+@keyframes fadePulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
 }

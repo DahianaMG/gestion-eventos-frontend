@@ -31,8 +31,12 @@
   </div>
 </div>
 
-<div *ngIf="errorMessage">
+<div *ngIf="errorMessage" class="alert error-message">
   {{ errorMessage }}
+</div>
+
+<div *ngIf="successMessage" class="alert error-message">
+  {{ successMessage }}
 </div>
 
 <div *ngIf="!isLoading && !errorMessage">
@@ -57,12 +61,17 @@
             Ver Detalles
           </button>
           <button
+            *ngIf="canEditOrDelete(event)"
             class="btn btn-info mx-1"
             [routerLink]="['/edit-event', event.id]"
           >
             Editar
           </button>
-          <button class="btn btn-info mx-1" (click)="deleteEvent(event.id)">
+          <button
+            *ngIf="canEditOrDelete(event)"
+            class="btn btn-info mx-1"
+            (click)="deleteEvent(event.id)"
+          >
             Eliminar
           </button>
         </div>

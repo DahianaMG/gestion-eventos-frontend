@@ -1,0 +1,122 @@
+<div class="container">
+  <div class="card border-primary shadow-sm">
+    <div class="card-body">
+      <h2 class="card-title text-center mb-4">Registrarme</h2>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="name" class="form-label">Nombre:</label>
+          <input
+            id="name"
+            type="text"
+            formControlName="name"
+            class="form-control bg-primary"
+          />
+          <div
+            *ngIf="
+              registerForm.get('name')?.invalid &&
+              registerForm.get('name')?.touched
+            "
+          >
+            El nombre es obligatorio.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Correo electrónico:</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            class="form-control bg-primary"
+          />
+          <div
+            *ngIf="
+              registerForm.get('email')?.invalid &&
+              registerForm.get('email')?.touched
+            "
+          >
+            Ingrese un email válido.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña:</label>
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            class="form-control bg-primary"
+          />
+          <div
+            *ngIf="
+              registerForm.get('password')?.touched &&
+              registerForm.get('password')?.hasError('required')
+            "
+          >
+            La contraseña es obligatoria.
+          </div>
+          <div
+            *ngIf="
+              registerForm.get('password')?.touched &&
+              registerForm.get('password')?.hasError('minlength')
+            "
+          >
+            La contraseña debe tener al menos 8 caracteres.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password_confirmation" class="form-label"
+            >Confirmar contraseña:</label
+          >
+          <input
+            id="password_confirmation"
+            type="password"
+            formControlName="password_confirmation"
+            class="form-control bg-primary"
+          />
+          <div
+            *ngIf="
+              registerForm.get('password_confirmation')?.touched &&
+              registerForm.get('password_confirmation')?.hasError('required')
+            "
+          >
+            La confirmación de contraseña es obligatoria.
+          </div>
+          <div
+            *ngIf="
+              registerForm.get('password_confirmation')?.touched &&
+              registerForm.get('password_confirmation')?.hasError('minlength')
+            "
+          >
+            Debe tener al menos 8 caracteres.
+          </div>
+          <div
+            *ngIf="
+              registerForm.get('password_confirmation')?.touched &&
+              registerForm.get('password_confirmation')?.value !==
+                registerForm.get('password')?.value
+            "
+          >
+            Las contraseñas no coinciden.
+          </div>
+        </div>
+
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          {{ errorMessage }}
+        </div>
+
+        <div class="text-center">
+          <button
+            type="submit"
+            class="btn btn-info"
+            [disabled]="registerForm.invalid"
+          >
+            Registrarme
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

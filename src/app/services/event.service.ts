@@ -33,7 +33,7 @@ export class EventService {
 
   //Create a new event
   createEvent(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/create-event`, data);
+    return this.http.post(`${this.apiUrl}/set-event`, data);
   }
 
   //Update an event

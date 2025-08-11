@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../../services/event.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-events',
@@ -8,14 +9,20 @@ import { EventService } from '../../services/event.service';
   styleUrls: ['./my-events.component.css']
 })
 export class MyEventsComponent implements OnInit {
-  title = 'Mis eventos creados';
+  title = 'Mis eventos';
   events: any[] = [];
   isLoading: boolean = true;
+  successMessage: string | null = null;
   errorMessage: string | null = null;
 
-  constructor(private eventService: EventService) {}
+  constructor(private eventService: EventService, private router: Router) {}
 
   ngOnInit(): void {
+    this.successMessage = localStorage.getItem('successMessage');
+    if (this.successMessage) {
+      localStorage.removeItem('successMessage');
+    }
+
     this.eventService.getMyEvents().subscribe({
       next: (data) => {
         this.events = data.map((event: any) => ({
@@ -38,11 +45,11 @@ export class MyEventsComponent implements OnInit {
       this.eventService.deleteEvent(id).subscribe({
         next: () => {
           this.events = this.events.filter(event => event.id !== id);
-          alert('Evento eliminado correctamente.');
+          this.successMessage = 'Evento eliminado correctamente.';
         },
         error: (err) => {
           console.error('Error al eliminar evento:', err);
-          alert('Hubo un error al intentar eliminar el evento.');
+          this.errorMessage = 'Hubo un error al intentar eliminar el evento.';
         }
       });
     }

@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<div class="container">
   <div class="card border-primary shadow-sm">
     <div class="card-body">
       <h2 class="card-title text-center mb-4">
@@ -17,6 +17,21 @@
               eventForm.get('title')?.invalid && eventForm.get('title')?.touched
             "
           />
+          <div
+            *ngIf="
+              eventForm.get('title')?.touched && eventForm.get('title')?.errors
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="eventForm.get('title')?.errors?.['required']">
+              El título es obligatorio.
+            </div>
+            <div
+              *ngIf="eventForm.get('title')?.errors?.['maxLength'] || eventForm.get('title')?.errors?.['maxlength']"
+            >
+              El título no puede tener más de 150 caracteres.
+            </div>
+          </div>
         </div>
 
         <div class="mb-3">
@@ -31,6 +46,17 @@
               eventForm.get('description')?.touched
             "
           ></textarea>
+          <div
+            *ngIf="
+              eventForm.get('description')?.touched &&
+              eventForm.get('description')?.errors
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="eventForm.get('description')?.errors?.['required']">
+              La descripción es obligatoria.
+            </div>
+          </div>
         </div>
 
         <div class="mb-3">
@@ -45,6 +71,20 @@
               eventForm.get('date_time')?.touched
             "
           />
+          <div
+            *ngIf="
+              eventForm.get('date_time')?.touched &&
+              eventForm.get('date_time')?.errors
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="eventForm.get('date_time')?.errors?.['required']">
+              La fecha y hora son obligatorias.
+            </div>
+            <div *ngIf="eventForm.get('date_time')?.errors?.['notFutureDate']">
+              La fecha y hora deben ser futuras.
+            </div>
+          </div>
         </div>
 
         <div class="mb-3">
@@ -59,6 +99,22 @@
               eventForm.get('location')?.touched
             "
           />
+          <div
+            *ngIf="
+              eventForm.get('location')?.touched &&
+              eventForm.get('location')?.errors
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="eventForm.get('location')?.errors?.['required']">
+              La ubicación es obligatoria.
+            </div>
+            <div
+              *ngIf="eventForm.get('location')?.errors?.['maxLength'] || eventForm.get('location')?.errors?.['maxlength']"
+            >
+              La ubicación no puede tener más de 150 caracteres.
+            </div>
+          </div>
         </div>
 
         <div class="form-check mb-3">
@@ -85,6 +141,23 @@
               eventForm.get('capacity')?.touched
             "
           />
+          <div
+            *ngIf="
+              eventForm.get('capacity')?.touched &&
+              eventForm.get('capacity')?.errors
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="eventForm.get('capacity')?.errors?.['required']">
+              La capacidad es obligatoria.
+            </div>
+            <div *ngIf="eventForm.get('capacity')?.errors?.['min']">
+              La capacidad debe ser al menos 1.
+            </div>
+            <div *ngIf="eventForm.get('capacity')?.errors?.['pattern']">
+              La capacidad debe ser un número entero válido.
+            </div>
+          </div>
         </div>
 
         <div class="text-center">

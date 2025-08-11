@@ -5,9 +5,15 @@ import { EventDetailComponent } from './events/event-detail/event-detail.compone
 import { EventFormComponent } from './events/event-form/event-form.component';
 import { MyEventsComponent } from './events/my-events/my-events.component';
 import { UserEventsComponent } from './events/user-events/user-events.component';
+import { LoginComponent } from './login/login/login.component';
+import { RegisterComponent } from './login/register/register.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'events', pathMatch: 'full' },
+
+  //Login
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
 
   //Events
   { path: 'events', component: EventsComponent },
@@ -16,8 +22,6 @@ const routes: Routes = [
   { path: 'edit-event/:id', component: EventFormComponent },
   { path: 'my-events', component: MyEventsComponent },
   { path: 'user-events/:id', component: UserEventsComponent },
-  //{ path: 'register', component: RegisterComponent },
-  //{ path: 'login', component: LoginComponent },
 
   { path: '**', component: EventsComponent }
 ];

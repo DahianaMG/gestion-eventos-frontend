@@ -19,12 +19,12 @@
         >Inicio</a
       >
     </li>
-    <li>
+    <li *ngIf="authService.isAuthenticated$ | async">
       <a routerLink="/my-events" class="nav-link px-2 text-light link-info"
         >Mis eventos</a
       >
     </li>
-    <li class="nav-item">
+    <li *ngIf="authService.isAuthenticated$ | async">
       <a href="#" class="nav-link px-2 text-light link-info"
         >Mis inscripciones</a
       >
@@ -35,9 +35,29 @@
     <li><a href="#" class="nav-link px-2 text-light link-info">Galería</a></li>
   </ul>
   <div class="col-lg-3 text-end">
-    <button type="button" class="btn btn-outline-light me-2">
+    <button
+      routerLink="/login"
+      type="button"
+      class="btn btn-outline-light me-2"
+      *ngIf="!(authService.isAuthenticated$ | async)"
+    >
       Iniciar sesión
     </button>
-    <button type="button" class="btn btn-info text-light">Registrarse</button>
+    <button
+      type="button"
+      class="btn btn-outline-light me-2"
+      *ngIf="authService.isAuthenticated$ | async"
+      (click)="logout()"
+    >
+      Cerrar sesión
+    </button>
+    <button
+      routerLink="/register"
+      type="button"
+      class="btn btn-info text-light"
+      *ngIf="!(authService.isAuthenticated$ | async)"
+    >
+      Registrarse
+    </button>
   </div>
 </header>
