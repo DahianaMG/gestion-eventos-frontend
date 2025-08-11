@@ -25,6 +25,14 @@
   </div>
 </div>
 
+<button
+  *ngIf="currentUser?.role === 'admin'"
+  class="btn btn-info my-3"
+  [routerLink]="['/create-event']"
+>
+  Crear Evento
+</button>
+
 <div *ngIf="isLoading">
   <div class="spinner-border text-info" role="status">
     <span class="visually-hidden">Loading...</span>

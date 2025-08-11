@@ -11,8 +11,6 @@
 </div>
 
 <div *ngIf="!isLoading && !errorMessage">
-  <h2>Eventos publicados por el usuario</h2>
-
   <div class="row g-4" *ngIf="events.length > 0; else noEvents">
     <div class="col-sm-12 col-md-6 text-center" *ngFor="let event of events">
       <div class="card border-primary bg-black">

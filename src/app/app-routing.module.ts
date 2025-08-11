@@ -7,9 +7,13 @@ import { MyEventsComponent } from './events/my-events/my-events.component';
 import { UserEventsComponent } from './events/user-events/user-events.component';
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './login/register/register.component';
+import { UsersComponent } from './users/users/users.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'events', pathMatch: 'full' },
+
+  //Users (admin)
+  { path: 'users', component: UsersComponent },
 
   //Login
   { path: 'register', component: RegisterComponent },

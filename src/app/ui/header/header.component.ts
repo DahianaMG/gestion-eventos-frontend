@@ -8,10 +8,18 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  currentUser: any;
+
   constructor(
     public authService: AuthService,
     private router: Router
   ) {}
+
+  ngOnInit() {
+    this.authService.currentUser$.subscribe(user => {
+      this.currentUser = user;
+    });
+  }
 
   logout() {
     this.authService.logout().subscribe({

@@ -19,9 +19,18 @@
         >Inicio</a
       >
     </li>
-    <li *ngIf="authService.isAuthenticated$ | async">
+    <li
+      *ngIf="
+        (authService.isAuthenticated$ | async) && currentUser?.role === 'user'
+      "
+    >
       <a routerLink="/my-events" class="nav-link px-2 text-light link-info"
         >Mis eventos</a
+      >
+    </li>
+    <li *ngIf="currentUser?.role === 'admin'">
+      <a routerLink="/users" class="nav-link px-2 text-light link-info"
+        >Usuarios</a
       >
     </li>
     <li *ngIf="authService.isAuthenticated$ | async">

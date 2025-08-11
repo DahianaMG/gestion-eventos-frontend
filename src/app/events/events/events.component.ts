@@ -47,8 +47,8 @@ export class EventsComponent implements OnInit {
           console.log('Eventos cargados:', this.events);
         },
         error: (err) => {
-          this.errorMessage = 'Error al cargar eventos. Por favor, intente de nuevo más tarde.';
           this.isLoading = false;
+          this.errorMessage = 'Error al cargar eventos. Por favor, intente de nuevo más tarde.';
           console.error('Error al cargar eventos:', err);
         }
       });

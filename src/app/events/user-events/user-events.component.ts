@@ -9,7 +9,7 @@ import { EventService } from '../../services/event.service';
   styleUrls: ['./user-events.component.css']
 })
 export class UserEventsComponent implements OnInit {
-  title = 'Eventos del usuario';
+  title = 'Eventos publicados por el usuario';
   events: any[] = [];
   isLoading: boolean = true;
   errorMessage: string | null = null;
