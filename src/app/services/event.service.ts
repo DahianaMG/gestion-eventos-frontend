@@ -26,7 +26,7 @@ export class EventService {
     return this.http.get(`${this.apiUrl}/events-by-user/${userId}`);
   }
 
-  //Get the events created by the authenticated user
+  //Get the events created by the authenticated user (organizer)
   getMyEvents(): Observable<any> {
     return this.http.get(`${this.apiUrl}/my-events`);
   }
@@ -36,12 +36,12 @@ export class EventService {
     return this.http.post(`${this.apiUrl}/set-event`, data);
   }
 
-  //Update an event
+  //Update an event (organizer)
   updateEvent(id: number, data: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/update-event/${id}`, data);
   }
 
-  //Delete an event
+  //Delete an event (organizer)
   deleteEvent(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/delete-event/${id}`);
   }
