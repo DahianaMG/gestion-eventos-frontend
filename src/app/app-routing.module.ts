@@ -8,6 +8,12 @@ import { UserEventsComponent } from './events/user-events/user-events.component'
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './login/register/register.component';
 import { UsersComponent } from './users/users/users.component';
+import { RegistrationsComponent } from './registrations/registrations/registrations.component';
+import { RegistrationDetailComponent } from './registrations/registration-detail/registration-detail.component';
+import { RegistrationFormComponent } from './registrations/registration-form/registration-form.component';
+import { MyRegistrationsComponent } from './registrations/my-registrations/my-registrations.component';
+import { EventRegistrationsComponent } from './registrations/event-registrations/event-registrations.component';
+import { UserRegistrationsComponent } from './registrations/user-registrations/user-registrations.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'events', pathMatch: 'full' },
@@ -26,6 +32,15 @@ const routes: Routes = [
   { path: 'edit-event/:id', component: EventFormComponent },
   { path: 'my-events', component: MyEventsComponent },
   { path: 'user-events/:id', component: UserEventsComponent },
+
+  //Registrations
+  { path: 'registrations', component: RegistrationsComponent },
+  { path: 'registration/:id', component: RegistrationDetailComponent },
+  { path: 'create-registration', component: RegistrationFormComponent },
+  { path: 'edit-registration/:id', component: RegistrationFormComponent },
+  { path: 'my-registrations', component: MyRegistrationsComponent },
+  { path: 'event-registrations/:id', component: EventRegistrationsComponent },
+  { path: 'user-registrations/:id', component: UserRegistrationsComponent },
 
   { path: '**', component: EventsComponent }
 ];

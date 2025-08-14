@@ -17,6 +17,12 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './login/register/register.component';
 import { UsersComponent } from './users/users/users.component';
+import { RegistrationsComponent } from './registrations/registrations/registrations.component';
+import { RegistrationDetailComponent } from './registrations/registration-detail/registration-detail.component';
+import { RegistrationFormComponent } from './registrations/registration-form/registration-form.component';
+import { MyRegistrationsComponent } from './registrations/my-registrations/my-registrations.component';
+import { EventRegistrationsComponent } from './registrations/event-registrations/event-registrations.component';
+import { UserRegistrationsComponent } from './registrations/user-registrations/user-registrations.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +36,13 @@ import { UsersComponent } from './users/users/users.component';
     FooterComponent,
     LoginComponent,
     RegisterComponent,
-    UsersComponent
+    UsersComponent,
+    RegistrationsComponent,
+    RegistrationDetailComponent,
+    RegistrationFormComponent,
+    MyRegistrationsComponent,
+    EventRegistrationsComponent,
+    UserRegistrationsComponent
   ],
   imports: [
     BrowserModule,

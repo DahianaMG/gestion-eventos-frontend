@@ -1,0 +1,66 @@
+<h2>Todas las inscripciones</h2>
+
+<div>
+  <button class="btn btn-info my-2" [routerLink]="['/create-registration']">
+    Nueva inscripción
+  </button>
+</div>
+
+<div *ngIf="errorMessage" class="alert error-message">
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="successMessage" class="alert success-message">
+  {{ successMessage }}
+</div>
+
+<div *ngIf="isLoading" class="spinner-border text-info" role="status">
+  <span class="visually-hidden">Cargando...</span>
+</div>
+
+<div *ngIf="!isLoading && !errorMessage">
+  <table
+    class="table table-dark table-striped my-3"
+    *ngIf="registrations.length > 0"
+  >
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>ID Usuario</th>
+        <th>ID Evento</th>
+        <th>Estado inscripción</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reg of registrations">
+        <td>{{ reg.id }}</td>
+        <td>{{ reg.user_id }}</td>
+        <td>{{ reg.event_id }}</td>
+        <td>{{ reg.status }}</td>
+        <td>
+          <button
+            class="btn btn-info btn-sm mx-1"
+            [routerLink]="['/registration', reg.id]"
+          >
+            Ver detalles
+          </button>
+          <button
+            class="btn btn-info btn-sm mx-1"
+            [routerLink]="['/edit-registration', reg.id]"
+          >
+            Editar
+          </button>
+          <button
+            class="btn btn-info btn-sm mx-1"
+            (click)="deleteRegistration(reg.id)"
+          >
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noRegistrations>No hay inscripciones.</ng-template>
+</div>

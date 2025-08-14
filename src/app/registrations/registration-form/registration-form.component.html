@@ -1,0 +1,177 @@
+<div class="container">
+  <div class="card border-primary shadow-sm">
+    <div class="card-body">
+      <h2 class="card-title text-center mb-4">
+        {{ isEditMode ? "Editar inscripción" : "Nueva inscripción" }}
+      </h2>
+
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3" *ngIf="currentUser?.role === 'admin'">
+          <label for="user_id" class="form-label">ID de usuario</label>
+          <input
+            id="user_id"
+            type="number"
+            formControlName="user_id"
+            class="form-control bg-primary"
+            [class.is-invalid]="
+              registrationForm.get('user_id')?.invalid &&
+              registrationForm.get('user_id')?.touched
+            "
+            min="1"
+          />
+          <div
+            *ngIf="
+              registrationForm.get('user_id')?.touched &&
+              registrationForm.get('user_id')?.errors
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="registrationForm.get('user_id')?.errors?.['required']">
+              El usuario es obligatorio.
+            </div>
+            <div *ngIf="registrationForm.get('user_id')?.errors?.['min']">
+              Debe ser mayor que 0.
+            </div>
+            <div *ngIf="registrationForm.get('user_id')?.errors?.['pattern']">
+              Debe ser un número entero válido.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3" *ngIf="!isEditMode && currentUser?.role === 'admin'">
+          <label for="event_id" class="form-label">Evento</label>
+          <select
+            id="event_id"
+            formControlName="event_id"
+            class="form-select bg-primary"
+            [class.is-invalid]="
+              registrationForm.get('event_id')?.invalid &&
+              registrationForm.get('event_id')?.touched
+            "
+          >
+            <option value="">Seleccione un evento</option>
+            <option *ngFor="let event of events" [value]="event.id">
+              {{ event.title }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              registrationForm.get('event_id')?.touched &&
+              registrationForm.get('event_id')?.errors
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="registrationForm.get('event_id')?.errors?.['required']">
+              El evento es obligatorio.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3" *ngIf="isEditMode && currentUser?.role !== 'admin'">
+          <label class="form-label">Evento</label>
+          <input
+            type="text"
+            class="form-control"
+            [value]="loadedRegistration?.event?.title"
+            disabled
+          />
+        </div>
+
+        <div
+          class="mb-3"
+          *ngIf="
+            isAdmin || (!isOrganizerFlag && (!isEditMode || loadedRegistration))
+          "
+        >
+          <label for="role_in_event" class="form-label">Rol en el evento</label>
+          <select
+            id="role_in_event"
+            formControlName="role_in_event"
+            class="form-control bg-primary"
+            [class.is-invalid]="
+              registrationForm.get('role_in_event')?.invalid &&
+              registrationForm.get('role_in_event')?.touched
+            "
+            maxlength="20"
+          >
+            <option value="">Seleccione el rol en el evento</option>
+            <option value="customer">Cliente/Asistente</option>
+            <option value="vendor">Vendedor/Emprendedor</option>
+          </select>
+          <div
+            *ngIf="
+              registrationForm.get('role_in_event')?.touched &&
+              registrationForm.get('role_in_event')?.errors
+            "
+            class="invalid-feedback"
+          >
+            <div
+              *ngIf="registrationForm.get('role_in_event')?.errors?.['required']"
+            >
+              El rol es obligatorio.
+            </div>
+            <div
+              *ngIf="registrationForm.get('role_in_event')?.errors?.['maxlength']"
+            >
+              Máximo 20 caracteres.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3" *ngIf="isAdmin || isOrganizerFlag">
+          <label for="status" class="form-label">Estado</label>
+          <select
+            id="status"
+            type="text"
+            formControlName="status"
+            class="form-control bg-primary"
+            [class.is-invalid]="
+              registrationForm.get('status')?.invalid &&
+              registrationForm.get('status')?.touched
+            "
+            maxlength="20"
+          >
+            <option value="">Seleccione un estado</option>
+            <option value="pending">Pendiente</option>
+            <option value="confirmed">Confirmado</option>
+            <option value="rejected">Rechazado</option>
+          </select>
+          <div
+            *ngIf="
+              registrationForm.get('status')?.touched &&
+              registrationForm.get('status')?.errors
+            "
+            class="invalid-feedback"
+          >
+            <div
+              *ngIf="
+                registrationForm.get('status')?.hasError('required') &&
+                registrationForm.get('status')?.touched
+              "
+              class="error"
+            >
+              El estado es obligatorio.
+            </div>
+            <div *ngIf="registrationForm.get('status')?.errors?.['maxlength']">
+              Máximo 20 caracteres.
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="errorMessage" class="alert error-message">
+          {{ errorMessage }}
+        </div>
+
+        <div class="text-center">
+          <button
+            type="submit"
+            class="btn btn-info"
+            [disabled]="registrationForm.invalid"
+          >
+            {{ isEditMode ? "Actualizar" : "Inscribir" }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

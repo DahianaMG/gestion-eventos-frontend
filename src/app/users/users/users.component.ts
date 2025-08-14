@@ -39,8 +39,4 @@ export class UsersComponent implements OnInit {
       }
     });
   }
-
-  getUserEvents(userId: number) {
-    this.router.navigate(['/user-events', userId]);
-  }
 }

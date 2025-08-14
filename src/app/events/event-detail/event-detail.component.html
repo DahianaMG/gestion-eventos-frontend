@@ -1,12 +1,12 @@
-<h1>Detalles del Evento</h1>
+<h1>Detalles del evento</h1>
 
 <div *ngIf="isLoading">
   <div class="spinner-border text-info" role="status">
-    <span class="visually-hidden">Loading...</span>
+    <span class="visually-hidden">Cargando...</span>
   </div>
 </div>
 
-<div *ngIf="errorMessage">
+<div *ngIf="errorMessage" class="alert alert-danger">
   {{ errorMessage }}
 </div>
 
@@ -43,7 +43,7 @@
         <h3 class="card-header bg-info">Actividades:</h3>
         <div class="card-body">
           <p class="card-text" *ngFor="let schedule of event.schedules">
-            {{ schedule.activity_name }}:
+            <strong>{{ schedule.activity_name }}:</strong>
             {{ schedule.start_time | date : "shortTime" }} -
             {{ schedule.end_time | date : "shortTime" }}
           </p>

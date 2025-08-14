@@ -43,7 +43,7 @@
   {{ errorMessage }}
 </div>
 
-<div *ngIf="successMessage" class="alert error-message">
+<div *ngIf="successMessage" class="alert success-message">
   {{ successMessage }}
 </div>
 
@@ -56,17 +56,35 @@
         <img src="..." class="card-img-top bg-primary" alt="..." />
         <h3 class="card-header bg-primary">{{ event.title }}</h3>
         <div class="card-body">
-          <p class="card-text">{{ event.description }}</p>
           <p class="card-text">
-            Fecha: {{ event.date_time | date : "longDate" }}
+            <strong>Descripción:</strong> {{ event.description }}
           </p>
-          <p class="card-text">Lugar: {{ event.location }}</p>
           <p class="card-text">
-            Con stands/feria de emprendedores: {{ event.has_fair_text }}
+            <strong>Fecha:</strong> {{ event.date_time | date : "longDate" }}
+          </p>
+          <p class="card-text"><strong>Lugar:</strong> {{ event.location }}</p>
+          <p class="card-text">
+            <strong>Con stands/feria de emprendedores:</strong>
+            {{ event.has_fair_text }}
           </p>
 
           <button class="btn btn-info mx-1" [routerLink]="['/event', event.id]">
             Ver Detalles
+          </button>
+          <button
+            *ngIf="canEditOrDelete(event)"
+            class="btn btn-info mx-1"
+            [routerLink]="['/event-registrations', event.id]"
+          >
+            Ver inscripciones
+          </button>
+          <button
+            *ngIf="!canEditOrDelete(event) && !isRegistered(event.id)"
+            class="btn btn-info mx-1"
+            [routerLink]="['/create-registration']"
+            [queryParams]="{ eventId: event.id }"
+          >
+            Inscribirme
           </button>
           <button
             *ngIf="canEditOrDelete(event)"

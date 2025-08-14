@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../../services/event.service';
+import { RegistrationService } from '../../services/registration.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
 export class EventsComponent implements OnInit {
   title = '¡Bienvenido!';
   events: any[] = [];
+  userRegistrations: any[] = [];
   isLoading: boolean = true;
   errorMessage: string | null = null;
   successMessage: string | null = null;
@@ -18,6 +20,7 @@ export class EventsComponent implements OnInit {
 
   constructor(
     private eventService: EventService,
+    private registrationService: RegistrationService,
     private authService: AuthService,
   ) { }
 
@@ -27,6 +30,7 @@ export class EventsComponent implements OnInit {
 
       if (user !== null || !this.authService.getToken()) {
       this.loadEvents();
+      this.loadUserRegistrations();
     }
     });
 
@@ -44,7 +48,7 @@ export class EventsComponent implements OnInit {
             has_fair_text: event.has_fair ? 'Sí' : 'No'
           }));
           this.isLoading = false;
-          console.log('Eventos cargados:', this.events);
+          console.log('Eventos cargados');
         },
         error: (err) => {
           this.isLoading = false;
@@ -54,9 +58,25 @@ export class EventsComponent implements OnInit {
       });
     }
 
+    loadUserRegistrations(): void {
+      this.registrationService.getMyRegistrations().subscribe({
+        next: (data) => {
+          this.userRegistrations = data;
+          console.log('Inscripciones cargadas');
+        },
+        error: (err) => {
+          console.error('Error al cargar inscripciones del usuario:', err);
+        }
+      });
+    }
+
 
   canEditOrDelete(event: any): boolean {
     return this.currentUser?.role === 'admin' || this.currentUser?.id === event.user_id;
+  }
+
+  isRegistered(eventId: number): boolean {
+    return this.userRegistrations.some(r => r.pivot.event_id === eventId);
   }
 
   deleteEvent(id: number): void {

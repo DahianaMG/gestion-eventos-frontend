@@ -1,0 +1,48 @@
+<h1>{{ title }}</h1>
+
+<div *ngIf="isLoading">
+  <div class="spinner-border text-info" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div *ngIf="successMessage" class="alert success-message">
+  {{ successMessage }}
+</div>
+
+<div *ngIf="!isLoading && !errorMessage">
+  <h2>Eventos a los que te inscribiste</h2>
+
+  <div class="row g-4" *ngIf="registrations.length > 0; else noRegistrations">
+    <div
+      class="col-sm-12 col-md-6 text-center"
+      *ngFor="let registration of registrations"
+    >
+      <div class="card border-primary bg-black">
+        <img src="..." class="card-img-top bg-primary" alt="..." />
+        <h3 class="card-header bg-primary">{{ registration.title }}</h3>
+        <div class="card-body">
+          <p class="card-text">{{ registration.description }}</p>
+          <p class="card-text">
+            Fecha: {{ registration.date_time | date : "longDate" }}
+          </p>
+          <p class="card-text">Lugar: {{ registration.location }}</p>
+          <p class="card-text">
+            Con stands/feria de emprendedores: {{ registration.has_fair }}
+          </p>
+
+          <button
+            class="btn btn-info mx-1"
+            [routerLink]="['/registration', registration.pivot.id]"
+          >
+            Ver detalles de la incripción
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noRegistrations>
+    <p>No te has inscripto a ningún evento todavía.</p>
+  </ng-template>
+</div>

@@ -1,0 +1,59 @@
+<h1>Detalles de la inscripción</h1>
+
+<div *ngIf="isLoading">
+  <div class="spinner-border text-info" role="status">
+    <span class="visually-hidden">Cargando...</span>
+  </div>
+</div>
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+  {{ errorMessage }}
+</div>
+
+<div
+  class="container text-center"
+  *ngIf="!isLoading && !errorMessage && registration"
+>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card border-primary bg-black mb-3">
+        <h2 class="card-header bg-primary">
+          Evento: {{ registration.event.title }}
+        </h2>
+        <div class="card-body">
+          <p class="card-text">
+            <strong>Usuario:</strong>
+            {{ registration.user.name }}
+          </p>
+          <p class="card-text">
+            <strong>Rol en evento:</strong>
+            {{ registration.role_in_event }}
+          </p>
+          <p class="card-text">
+            <strong>Estado de inscripción:</strong>
+            {{ registration.status }}
+          </p>
+          <p class="card-text">
+            <strong>Fecha de inscripción:</strong>
+            {{ registration.created_at | date : "longDate" }}
+          </p>
+
+          <button
+            *ngIf="currentUser?.role === 'user'"
+            class="btn btn-info mx-1"
+            [routerLink]="['/edit-registration', registration.id]"
+          >
+            Editar
+          </button>
+          <button
+            *ngIf="currentUser?.role === 'user'"
+            class="btn btn-info mx-1"
+            (click)="deleteRegistration()"
+          >
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

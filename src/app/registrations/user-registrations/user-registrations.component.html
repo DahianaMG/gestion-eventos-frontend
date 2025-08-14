@@ -1,0 +1,83 @@
+<h1>{{ title }}</h1>
+
+<div *ngIf="isLoading">
+  <div class="spinner-border text-info" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="!isLoading && !errorMessage">
+  <div *ngIf="registrations.length > 0; else noRegistrations">
+    <div
+      class="row g-4 align-items-stretch"
+      *ngIf="registrations.length > 0; else noRegistrations"
+    >
+      <div
+        class="col-sm-12 col-md-6 d-flex flex-column"
+        *ngFor="let registration of registrations"
+      >
+        <!-- Evento -->
+        <div class="card border-primary bg-black text-center flex-fill mb-3">
+          <img src="..." class="card-img-top bg-primary" alt="..." />
+          <h3 class="card-header bg-primary">
+            {{ registration.title }}
+          </h3>
+          <div class="card-body">
+            <p class="card-text">
+              <strong>Descripción:</strong> {{ registration.description }}
+            </p>
+            <p class="card-text">
+              <strong>Fecha:</strong>
+              {{ registration.date_time | date : "longDate" }}
+            </p>
+            <p class="card-text">
+              <strong>Lugar:</strong> {{ registration.location }}
+            </p>
+            <p class="card-text">
+              <strong>Con stands/feria de emprendedores:</strong>
+              {{ registration.has_fair }}
+            </p>
+          </div>
+        </div>
+
+        <!-- Inscripción -->
+        <div class="card border-info bg-black text-center flex-fill mb-3">
+          <h3 class="card-header bg-info">Inscripción</h3>
+          <div class="card-body">
+            <p class="card-text">
+              <strong>Usuario:</strong>
+              {{ userName }}
+            </p>
+            <p class="card-text">
+              <strong>Rol en evento:</strong>
+              {{ registration.pivot.role_in_event }}
+            </p>
+            <p class="card-text">
+              <strong>Estado de inscripción:</strong>
+              {{ registration.pivot.status }}
+            </p>
+            <p class="card-text">
+              <strong>Fecha de inscripción:</strong>
+              {{ registration.created_at | date : "longDate" }}
+            </p>
+
+            <button
+              class="btn btn-info mx-1"
+              [routerLink]="['/edit-registration', registration.pivot.id]"
+            >
+              Editar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noRegistrations>
+    <p>Este usuario no se inscribió a ningún evento.</p>
+  </ng-template>
+</div>

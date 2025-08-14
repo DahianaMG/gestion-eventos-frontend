@@ -33,8 +33,19 @@
         >Usuarios</a
       >
     </li>
-    <li *ngIf="authService.isAuthenticated$ | async">
-      <a href="#" class="nav-link px-2 text-light link-info"
+    <li *ngIf="currentUser?.role === 'admin'">
+      <a routerLink="/registrations" class="nav-link px-2 text-light link-info"
+        >Inscripciones</a
+      >
+    </li>
+    <li
+      *ngIf="
+        (authService.isAuthenticated$ | async) && currentUser?.role === 'user'
+      "
+    >
+      <a
+        routerLink="/my-registrations"
+        class="nav-link px-2 text-light link-info"
         >Mis inscripciones</a
       >
     </li>

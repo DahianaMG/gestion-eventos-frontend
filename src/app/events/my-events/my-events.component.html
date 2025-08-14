@@ -42,6 +42,12 @@
           </button>
           <button
             class="btn btn-info mx-1"
+            [routerLink]="['/event-registrations', event.id]"
+          >
+            Ver inscripciones
+          </button>
+          <button
+            class="btn btn-info mx-1"
             [routerLink]="['/edit-event', event.id]"
           >
             Editar
