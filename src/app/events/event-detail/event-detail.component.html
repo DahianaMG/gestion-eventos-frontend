@@ -47,6 +47,9 @@
             {{ schedule.start_time | date : "shortTime" }} -
             {{ schedule.end_time | date : "shortTime" }}
           </p>
+          <button class="btn btn-info" [routerLink]="['/schedules', id]">
+            Ver Detalles
+          </button>
         </div>
       </div>
     </div>

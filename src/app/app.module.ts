@@ -23,6 +23,8 @@ import { RegistrationFormComponent } from './registrations/registration-form/reg
 import { MyRegistrationsComponent } from './registrations/my-registrations/my-registrations.component';
 import { EventRegistrationsComponent } from './registrations/event-registrations/event-registrations.component';
 import { UserRegistrationsComponent } from './registrations/user-registrations/user-registrations.component';
+import { SchedulesComponent } from './schedules/schedules/schedules.component';
+import { ScheduleFormComponent } from './schedules/schedule-form/schedule-form.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { UserRegistrationsComponent } from './registrations/user-registrations/u
     RegistrationFormComponent,
     MyRegistrationsComponent,
     EventRegistrationsComponent,
-    UserRegistrationsComponent
+    UserRegistrationsComponent,
+    SchedulesComponent,
+    ScheduleFormComponent
   ],
   imports: [
     BrowserModule,

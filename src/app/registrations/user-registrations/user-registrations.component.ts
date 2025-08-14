@@ -38,8 +38,7 @@ export class UserRegistrationsComponent implements OnInit {
 
     this.registrationService.getRegistrationsByUser(this.userId).subscribe({
       next: (data) => {
-        this.registrations = data
-        console.log(data)
+        this.registrations = data;
         this.isLoading = false;
       },
       error: (err) => {

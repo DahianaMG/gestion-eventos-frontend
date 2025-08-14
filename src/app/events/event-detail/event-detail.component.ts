@@ -10,6 +10,7 @@ import { EventService } from '../../services/event.service';
 })
 export class EventDetailComponent implements OnInit {
   event: any;
+  id: any;
   isLoading: boolean = true;
   errorMessage: string | null = null;
 
@@ -19,9 +20,9 @@ export class EventDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.eventService.getEventById(+id).subscribe({
+    this.id = this.route.snapshot.paramMap.get('id');
+    if (this.id) {
+      this.eventService.getEventById(this.id).subscribe({
         next: (data) => {
           this.event = {
             ...data,

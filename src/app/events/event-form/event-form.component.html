@@ -2,7 +2,7 @@
   <div class="card border-primary shadow-sm">
     <div class="card-body">
       <h2 class="card-title text-center mb-4">
-        {{ isEditMode ? "Editar Evento" : "Crear Nuevo Evento" }}
+        {{ isEditMode ? "Editar Evento" : "Crear evento" }}
       </h2>
 
       <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">

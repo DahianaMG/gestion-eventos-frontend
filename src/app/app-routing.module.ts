@@ -14,11 +14,13 @@ import { RegistrationFormComponent } from './registrations/registration-form/reg
 import { MyRegistrationsComponent } from './registrations/my-registrations/my-registrations.component';
 import { EventRegistrationsComponent } from './registrations/event-registrations/event-registrations.component';
 import { UserRegistrationsComponent } from './registrations/user-registrations/user-registrations.component';
+import { SchedulesComponent } from './schedules/schedules/schedules.component';
+import { ScheduleFormComponent } from './schedules/schedule-form/schedule-form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'events', pathMatch: 'full' },
 
-  //Users (admin)
+  //Users
   { path: 'users', component: UsersComponent },
 
   //Login
@@ -41,6 +43,11 @@ const routes: Routes = [
   { path: 'my-registrations', component: MyRegistrationsComponent },
   { path: 'event-registrations/:id', component: EventRegistrationsComponent },
   { path: 'user-registrations/:id', component: UserRegistrationsComponent },
+
+  //Schedules
+  { path: 'schedules/:id', component: SchedulesComponent },
+  { path: 'create-schedule', component: ScheduleFormComponent },
+  { path: 'edit-schedule/:id', component: ScheduleFormComponent },
 
   { path: '**', component: EventsComponent }
 ];

@@ -29,8 +29,8 @@ export class EventsComponent implements OnInit {
       this.currentUser = user;
 
       if (user !== null || !this.authService.getToken()) {
-      this.loadEvents();
-      this.loadUserRegistrations();
+        this.loadEvents();
+        this.loadUserRegistrations();
     }
     });
 

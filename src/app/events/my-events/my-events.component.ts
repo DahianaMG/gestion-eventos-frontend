@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../../services/event.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-events',
@@ -15,7 +14,7 @@ export class MyEventsComponent implements OnInit {
   successMessage: string | null = null;
   errorMessage: string | null = null;
 
-  constructor(private eventService: EventService, private router: Router) {}
+  constructor(private eventService: EventService) {}
 
   ngOnInit(): void {
     this.successMessage = localStorage.getItem('successMessage');
@@ -41,7 +40,7 @@ export class MyEventsComponent implements OnInit {
   }
 
   deleteEvent(id: number): void {
-    if (confirm('¿Estás seguro de que querés eliminar este evento?')) {
+    if (confirm('¿Estás seguro de querer eliminar este evento?')) {
       this.eventService.deleteEvent(id).subscribe({
         next: () => {
           this.events = this.events.filter(event => event.id !== id);

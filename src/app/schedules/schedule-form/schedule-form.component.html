@@ -1,0 +1,167 @@
+<div class="container">
+  <div class="card border-primary shadow-sm">
+    <div class="card-body">
+      <h2 class="card-title text-center mb-4">
+        {{ isEditMode ? "Editar Actividad" : "Crear Actividad" }}
+      </h2>
+
+      <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
+        <!-- Select de eventos solo si no viene event_id -->
+        <div class="mb-3" *ngIf="!eventId">
+          <label for="event_id" class="form-label">Evento</label>
+          <select
+            id="event_id"
+            formControlName="event_id"
+            class="form-control bg-primary"
+            [class.is-invalid]="
+              scheduleForm.get('event_id')?.invalid &&
+              scheduleForm.get('event_id')?.touched
+            "
+          >
+            <option value="">Seleccione un evento</option>
+            <option *ngFor="let ev of events" [value]="ev.id">
+              {{ ev.title }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              scheduleForm.get('event_id')?.touched &&
+              scheduleForm.get('event_id')?.errors
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="scheduleForm.get('event_id')?.errors?.['required']">
+              Debe seleccionar un evento.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="activity_name" class="form-label"
+            >Nombre de la Actividad</label
+          >
+          <input
+            id="activity_name"
+            formControlName="activity_name"
+            type="text"
+            class="form-control bg-primary"
+            [class.is-invalid]="
+              scheduleForm.get('activity_name')?.invalid &&
+              scheduleForm.get('activity_name')?.touched
+            "
+          />
+          <div
+            *ngIf="
+              scheduleForm.get('activity_name')?.touched &&
+              scheduleForm.get('activity_name')?.errors
+            "
+            class="invalid-feedback"
+          >
+            <div
+              *ngIf="scheduleForm.get('activity_name')?.errors?.['required']"
+            >
+              El nombre es obligatorio.
+            </div>
+            <div
+              *ngIf="scheduleForm.get('activity_name')?.errors?.['maxlength']"
+            >
+              Máximo 100 caracteres.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="start_time" class="form-label">Hora de inicio</label>
+          <input
+            id="start_time"
+            formControlName="start_time"
+            type="time"
+            class="form-control bg-primary"
+            [class.is-invalid]="
+              scheduleForm.get('start_time')?.invalid &&
+              scheduleForm.get('start_time')?.touched
+            "
+          />
+          <div
+            *ngIf="
+              scheduleForm.get('start_time')?.touched &&
+              scheduleForm.get('start_time')?.errors
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="scheduleForm.get('start_time')?.errors?.['required']">
+              La hora de inicio es obligatoria.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="end_time" class="form-label">Hora de fin</label>
+          <input
+            id="end_time"
+            formControlName="end_time"
+            type="time"
+            class="form-control bg-primary"
+            [class.is-invalid]="
+              scheduleForm.get('end_time')?.invalid &&
+              scheduleForm.get('end_time')?.touched
+            "
+          />
+          <div
+            *ngIf="
+              scheduleForm.get('end_time')?.touched &&
+              scheduleForm.get('end_time')?.errors
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="scheduleForm.get('end_time')?.errors?.['required']">
+              La hora de fin es obligatoria.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="location_description" class="form-label">Ubicación</label>
+          <input
+            id="location_description"
+            formControlName="location_description"
+            type="text"
+            class="form-control bg-primary"
+            [class.is-invalid]="
+              scheduleForm.get('location_description')?.invalid &&
+              scheduleForm.get('location_description')?.touched
+            "
+          />
+          <div
+            *ngIf="
+              scheduleForm.get('location_description')?.touched &&
+              scheduleForm.get('location_description')?.errors
+            "
+            class="invalid-feedback"
+          >
+            <div
+              *ngIf="scheduleForm.get('location_description')?.errors?.['required']"
+            >
+              La ubicación es obligatoria.
+            </div>
+            <div
+              *ngIf="scheduleForm.get('location_description')?.errors?.['maxlength']"
+            >
+              Máximo 150 caracteres.
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button
+            type="submit"
+            class="btn btn-info"
+            [disabled]="scheduleForm.invalid"
+          >
+            {{ isEditMode ? "Actualizar" : "Crear" }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
