@@ -12,17 +12,18 @@
   {{ successMessage }}
 </div>
 
+<div>
+  <button
+    *ngIf="canEditOrDelete(event)"
+    class="btn btn-info"
+    [routerLink]="['/create-schedule']"
+    [queryParams]="{ event_id: eventId }"
+  >
+    Nueva actividad
+  </button>
+</div>
+
 <div *ngIf="!isLoading && schedules.length > 0" class="row g-4">
-  <div>
-    <button
-      *ngIf="canEditOrDelete(event)"
-      class="btn btn-info"
-      [routerLink]="['/create-schedule']"
-      [queryParams]="{ event_id: eventId }"
-    >
-      Nueva actividad
-    </button>
-  </div>
   <h2>Actividades del evento</h2>
   <div
     *ngFor="let schedule of schedules"

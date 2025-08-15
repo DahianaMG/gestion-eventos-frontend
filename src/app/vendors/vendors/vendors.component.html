@@ -12,17 +12,18 @@
   {{ successMessage }}
 </div>
 
+<div>
+  <button
+    *ngIf="canCreate(event)"
+    class="btn btn-info"
+    [routerLink]="['/create-vendor']"
+    [queryParams]="{ event_id: eventId }"
+  >
+    Nuevo stand
+  </button>
+</div>
+
 <div *ngIf="!isLoading && vendors.length > 0" class="row g-4">
-  <div>
-    <button
-      *ngIf="canCreate(event)"
-      class="btn btn-info"
-      [routerLink]="['/create-vendor']"
-      [queryParams]="{ event_id: eventId }"
-    >
-      Nuevo stand
-    </button>
-  </div>
   <h2>Stands del evento</h2>
   <div *ngFor="let vendor of vendors" class="col-sm-12 col-md-6 text-center">
     <div class="card border-primary bg-black">
