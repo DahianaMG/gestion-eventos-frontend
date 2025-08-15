@@ -18,12 +18,14 @@ import { SchedulesComponent } from './schedules/schedules/schedules.component';
 import { ScheduleFormComponent } from './schedules/schedule-form/schedule-form.component';
 import { VendorsComponent } from './vendors/vendors/vendors.component';
 import { VendorFormComponent } from './vendors/vendor-form/vendor-form.component';
+import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'events', pathMatch: 'full' },
 
   //Users
-  { path: 'users', component: UsersComponent },
+  { path: 'users', component: UsersComponent, canActivate: [AdminGuard] },
 
   //Login
   { path: 'register', component: RegisterComponent },
@@ -32,29 +34,29 @@ const routes: Routes = [
   //Events
   { path: 'events', component: EventsComponent },
   { path: 'event/:id', component: EventDetailComponent },
-  { path: 'create-event', component: EventFormComponent },
-  { path: 'edit-event/:id', component: EventFormComponent },
-  { path: 'my-events', component: MyEventsComponent },
-  { path: 'user-events/:id', component: UserEventsComponent },
+  { path: 'create-event', component: EventFormComponent, canActivate: [AuthGuard] },
+  { path: 'edit-event/:id', component: EventFormComponent, canActivate: [AuthGuard] },
+  { path: 'my-events', component: MyEventsComponent, canActivate: [AuthGuard] },
+  { path: 'user-events/:id', component: UserEventsComponent, canActivate: [AdminGuard] },
 
   //Registrations
-  { path: 'registrations', component: RegistrationsComponent },
-  { path: 'registration/:id', component: RegistrationDetailComponent },
-  { path: 'create-registration', component: RegistrationFormComponent },
-  { path: 'edit-registration/:id', component: RegistrationFormComponent },
-  { path: 'my-registrations', component: MyRegistrationsComponent },
-  { path: 'event-registrations/:id', component: EventRegistrationsComponent },
-  { path: 'user-registrations/:id', component: UserRegistrationsComponent },
+  { path: 'registrations', component: RegistrationsComponent, canActivate: [AdminGuard] },
+  { path: 'registration/:id', component: RegistrationDetailComponent, canActivate: [AuthGuard] },
+  { path: 'create-registration', component: RegistrationFormComponent, canActivate: [AuthGuard] },
+  { path: 'edit-registration/:id', component: RegistrationFormComponent, canActivate: [AuthGuard] },
+  { path: 'my-registrations', component: MyRegistrationsComponent, canActivate: [AuthGuard] },
+  { path: 'event-registrations/:id', component: EventRegistrationsComponent, canActivate: [AuthGuard] },
+  { path: 'user-registrations/:id', component: UserRegistrationsComponent, canActivate: [AdminGuard] },
 
   //Schedules
-  { path: 'schedules/:id', component: SchedulesComponent },
-  { path: 'create-schedule', component: ScheduleFormComponent },
-  { path: 'edit-schedule/:id', component: ScheduleFormComponent },
+  { path: 'schedules/:id', component: SchedulesComponent, canActivate: [AuthGuard] },
+  { path: 'create-schedule', component: ScheduleFormComponent, canActivate: [AuthGuard] },
+  { path: 'edit-schedule/:id', component: ScheduleFormComponent, canActivate: [AuthGuard] },
 
   //Vendors
-  { path: 'vendors/:id', component: VendorsComponent },
-  { path: 'create-vendor', component: VendorFormComponent },
-  { path: 'edit-vendor/:id', component: VendorFormComponent },
+  { path: 'vendors/:id', component: VendorsComponent, canActivate: [AuthGuard] },
+  { path: 'create-vendor', component: VendorFormComponent, canActivate: [AuthGuard] },
+  { path: 'edit-vendor/:id', component: VendorFormComponent, canActivate: [AuthGuard] },
 
   { path: '**', component: EventsComponent }
 ];

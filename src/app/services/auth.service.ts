@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import{ environment} from'../../environments/environment';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,18 +17,22 @@ export class AuthService {
   currentUser$ = this.currentUserSubject.asObservable();
 
   constructor(private http: HttpClient) {
-  this.authStatus.next(this.hasToken());
+    this.authStatus.next(this.hasToken());
 
-  const storedUser = localStorage.getItem('current_user');
-  if (storedUser) {
-    this.currentUserSubject.next(JSON.parse(storedUser));
-  } else if (this.hasToken()) {
-    this.loadCurrentUser();
+    const storedUser = localStorage.getItem('current_user');
+    if (storedUser) {
+      this.currentUserSubject.next(JSON.parse(storedUser));
+    } else if (this.hasToken()) {
+      this.loadCurrentUser();
+    }
   }
-}
 
   private hasToken(): boolean {
     return !!localStorage.getItem('auth_token');
+  }
+
+  get isAuthenticated(): boolean {
+    return this.authStatus.value;
   }
 
   register(userData: any): Observable<any> {

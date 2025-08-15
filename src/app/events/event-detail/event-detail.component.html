@@ -47,7 +47,11 @@
             {{ schedule.start_time | date : "shortTime" }} -
             {{ schedule.end_time | date : "shortTime" }}
           </p>
-          <button class="btn btn-info" [routerLink]="['/schedules', id]">
+          <button
+            *ngIf="authService.isAuthenticated$ | async"
+            class="btn btn-info"
+            [routerLink]="['/schedules', id]"
+          >
             Ver Detalles
           </button>
         </div>
@@ -64,7 +68,11 @@
             <strong>{{ vendor.stand_name }}</strong
             >: {{ vendor.stand_description }}
           </p>
-          <button class="btn btn-info" [routerLink]="['/vendors', id]">
+          <button
+            *ngIf="authService.isAuthenticated$ | async"
+            class="btn btn-info"
+            [routerLink]="['/vendors', id]"
+          >
             Ver Detalles
           </button>
         </div>

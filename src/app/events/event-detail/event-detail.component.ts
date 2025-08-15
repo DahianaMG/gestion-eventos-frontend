@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EventService } from '../../services/event.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-event-detail',
@@ -16,7 +17,8 @@ export class EventDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private eventService: EventService
+    private eventService: EventService,
+    public authService: AuthService
   ) {}
 
   ngOnInit(): void {
