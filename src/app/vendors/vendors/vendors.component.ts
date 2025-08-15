@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ScheduleService } from '../../services/schedule.service';
+import { VendorService } from '../../services/vendor.service';
 import { EventService } from '../../services/event.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-schedules',
+  selector: 'app-vendors',
   standalone: false,
-  templateUrl: './schedules.component.html',
-  styleUrls: ['./schedules.component.css']
+  templateUrl: './vendors.component.html',
+  styleUrls: ['./vendors.component.css']
 })
-export class SchedulesComponent implements OnInit {
-  title = 'Actividades'
+export class VendorsComponent implements OnInit {
+  title = 'Stands'
   eventId!: number;
-  schedules: any[] = [];
+  vendors: any[] = [];
   isLoading = true;
   errorMessage: string | null = null;
   successMessage: string | null = null;
@@ -22,7 +22,7 @@ export class SchedulesComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private scheduleService: ScheduleService,
+    private vendorService: VendorService,
     private eventService: EventService,
     private authService: AuthService
   ) {}
@@ -52,28 +52,32 @@ export class SchedulesComponent implements OnInit {
       this.isLoading = false;
     }
 
-    this.scheduleService.getSchedules(this.eventId).subscribe({
+    this.vendorService.getVendors(this.eventId).subscribe({
       next: (data) => {
-        this.schedules = data;
+        this.vendors = data;
         this.isLoading = false;
       },
       error: (err) => {
-        console.error('Error al obtener actividades', err);
-        this.errorMessage = 'No se pudieron cargar las actividades.';
+        console.error('Error al obtener stands', err);
+        this.errorMessage = 'No se pudieron cargar los stands.';
         this.isLoading = false;
       }
     });
   }
 
-  canEditOrDelete(event: any): boolean {
+  canEditOrDelete(event: any, vendorId: number): boolean {
+    return this.currentUser?.role === 'admin' || this.currentUser?.id === event.user_id || this.currentUser?.id === vendorId;
+  }
+
+  canCreate(event: any): boolean {
     return this.currentUser?.role === 'admin' || this.currentUser?.id === event.user_id;
   }
 
-  deleteSchedule(id: number): void {
+  deleteVendor(id: number): void {
     if (confirm('¿Estás seguro de querer eliminar esta actividad?')) {
-      this.scheduleService.deleteSchedule(id).subscribe({
+      this.vendorService.deleteVendor(id).subscribe({
         next: () => {
-          this.schedules = this.schedules.filter(schedule => schedule.id !== id);
+          this.vendors = this.vendors.filter(vendor => vendor.id !== id);
           this.successMessage = 'Actividad eliminada correctamente.';
         },
         error: (err) => {

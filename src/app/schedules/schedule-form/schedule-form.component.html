@@ -6,7 +6,6 @@
       </h2>
 
       <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
-        <!-- Select de eventos solo si no viene event_id -->
         <div class="mb-3" *ngIf="!eventId">
           <label for="event_id" class="form-label">Evento</label>
           <select

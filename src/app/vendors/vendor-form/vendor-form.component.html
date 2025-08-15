@@ -1,0 +1,176 @@
+<div *ngIf="isLoading">
+  <div class="spinner-border text-info" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div *ngIf="!isLoading" class="container">
+  <div class="card border-primary shadow-sm">
+    <div class="card-body">
+      <h2 class="card-title text-center mb-4">
+        {{ isEditMode ? "Editar Stand" : "Crear Stand" }}
+      </h2>
+
+      <form [formGroup]="vendorForm" (ngSubmit)="onSubmit()">
+        <div
+          class="mb-3"
+          *ngIf="
+            currentUser?.role === 'admin' || currentUser?.role === 'organizer'
+          "
+        >
+          <label for="user_id" class="form-label">Vendedor/Emprendedor</label>
+          <input
+            id="user_id"
+            formControlName="user_id"
+            type="number"
+            class="form-control bg-primary"
+            [class.is-invalid]="
+              vendorForm.get('user_id')?.invalid &&
+              vendorForm.get('user_id')?.touched
+            "
+          />
+          <div
+            *ngIf="
+              vendorForm.get('user_id')?.touched &&
+              vendorForm.get('user_id')?.errors
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="vendorForm.get('user_id')?.errors?.['required']">
+              Debe ingresar el ID del dueño.
+            </div>
+          </div>
+        </div>
+
+        <div
+          *ngIf="!isEditMode || vendorForm.value.user_id !== currentUser.id"
+          class="mb-3"
+        >
+          <label for="event_id" class="form-label">Evento</label>
+          <select
+            id="event_id"
+            formControlName="event_id"
+            class="form-control bg-primary"
+            [class.is-invalid]="
+              vendorForm.get('event_id')?.invalid &&
+              vendorForm.get('event_id')?.touched
+            "
+          >
+            <option value="">Seleccione un evento</option>
+            <option *ngFor="let ev of events" [value]="ev.id">
+              {{ ev.title }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              vendorForm.get('event_id')?.touched &&
+              vendorForm.get('event_id')?.errors
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="vendorForm.get('event_id')?.errors?.['required']">
+              Debe seleccionar un evento.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="stand_name" class="form-label">Nombre del stand</label>
+          <input
+            id="stand_name"
+            formControlName="stand_name"
+            type="text"
+            class="form-control bg-primary"
+            [class.is-invalid]="
+              vendorForm.get('stand_name')?.invalid &&
+              vendorForm.get('stand_name')?.touched
+            "
+          />
+          <div
+            *ngIf="
+              vendorForm.get('stand_name')?.touched &&
+              vendorForm.get('stand_name')?.errors
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="vendorForm.get('stand_name')?.errors?.['required']">
+              El nombre es obligatorio.
+            </div>
+            <div *ngIf="vendorForm.get('stand_name')?.errors?.['maxlength']">
+              Máximo 100 caracteres.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="stand_description" class="form-label">Descripción</label>
+          <textarea
+            id="stand_description"
+            formControlName="stand_description"
+            class="form-control bg-primary"
+            [class.is-invalid]="
+              vendorForm.get('stand_description')?.invalid &&
+              vendorForm.get('stand_description')?.touched
+            "
+          ></textarea>
+          <div
+            *ngIf="
+              vendorForm.get('stand_description')?.touched &&
+              vendorForm.get('stand_description')?.errors
+            "
+            class="invalid-feedback"
+          >
+            <div
+              *ngIf="vendorForm.get('stand_description')?.errors?.['required']"
+            >
+              La descripción es obligatoria.
+            </div>
+          </div>
+        </div>
+
+        <div
+          *ngIf="!isEditMode || vendorForm.value.user_id !== currentUser.id"
+          class="mb-3"
+        >
+          <label for="stand_location" class="form-label">Ubicación</label>
+          <input
+            id="stand_location"
+            formControlName="stand_location"
+            type="text"
+            class="form-control bg-primary"
+            [class.is-invalid]="
+              vendorForm.get('stand_location')?.invalid &&
+              vendorForm.get('stand_location')?.touched
+            "
+          />
+          <div
+            *ngIf="
+              vendorForm.get('stand_location')?.touched &&
+              vendorForm.get('stand_location')?.errors
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="vendorForm.get('stand_location')?.errors?.['required']">
+              La ubicación es obligatoria.
+            </div>
+            <div
+              *ngIf="vendorForm.get('stand_location')?.errors?.['maxlength']"
+            >
+              Máximo 100 caracteres.
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button
+            type="submit"
+            class="btn btn-info"
+            [disabled]="vendorForm.invalid"
+          >
+            {{ isEditMode ? "Actualizar" : "Crear" }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -16,6 +16,8 @@ import { EventRegistrationsComponent } from './registrations/event-registrations
 import { UserRegistrationsComponent } from './registrations/user-registrations/user-registrations.component';
 import { SchedulesComponent } from './schedules/schedules/schedules.component';
 import { ScheduleFormComponent } from './schedules/schedule-form/schedule-form.component';
+import { VendorsComponent } from './vendors/vendors/vendors.component';
+import { VendorFormComponent } from './vendors/vendor-form/vendor-form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'events', pathMatch: 'full' },
@@ -48,6 +50,11 @@ const routes: Routes = [
   { path: 'schedules/:id', component: SchedulesComponent },
   { path: 'create-schedule', component: ScheduleFormComponent },
   { path: 'edit-schedule/:id', component: ScheduleFormComponent },
+
+  //Vendors
+  { path: 'vendors/:id', component: VendorsComponent },
+  { path: 'create-vendor', component: VendorFormComponent },
+  { path: 'edit-vendor/:id', component: VendorFormComponent },
 
   { path: '**', component: EventsComponent }
 ];

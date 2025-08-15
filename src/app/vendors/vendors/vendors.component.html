@@ -1,0 +1,59 @@
+<h1>{{ title }}</h1>
+
+<div *ngIf="isLoading">
+  <div class="spinner-border text-info" role="status">
+    <span class="visually-hidden">Cargando...</span>
+  </div>
+</div>
+
+<div *ngIf="errorMessage" class="alert error-message">{{ errorMessage }}</div>
+
+<div *ngIf="successMessage" class="alert success-message">
+  {{ successMessage }}
+</div>
+
+<div *ngIf="!isLoading && vendors.length > 0" class="row g-4">
+  <div>
+    <button
+      *ngIf="canCreate(event)"
+      class="btn btn-info"
+      [routerLink]="['/create-vendor']"
+      [queryParams]="{ event_id: eventId }"
+    >
+      Nuevo stand
+    </button>
+  </div>
+  <h2>Stands del evento</h2>
+  <div *ngFor="let vendor of vendors" class="col-sm-12 col-md-6 text-center">
+    <div class="card border-primary bg-black">
+      <h3 class="card-header bg-primary">{{ vendor.stand_name }}</h3>
+      <div class="card-body">
+        <p class="card-text">
+          {{ vendor.stand_description }}
+        </p>
+        <p class="card-text">
+          <strong>Ubicación: </strong>{{ vendor.stand_location }}
+        </p>
+
+        <button
+          *ngIf="canEditOrDelete(event, vendor.user_id)"
+          class="btn btn-info mx-1"
+          [routerLink]="['/edit-vendor', vendor.id]"
+        >
+          Editar
+        </button>
+        <button
+          *ngIf="canEditOrDelete(event, vendor.user_id)"
+          class="btn btn-info mx-1"
+          (click)="deleteVendor(vendor.id)"
+        >
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!isLoading && vendors.length === 0">
+  No hay stands cargados para este evento.
+</div>

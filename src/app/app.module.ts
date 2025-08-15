@@ -25,6 +25,8 @@ import { EventRegistrationsComponent } from './registrations/event-registrations
 import { UserRegistrationsComponent } from './registrations/user-registrations/user-registrations.component';
 import { SchedulesComponent } from './schedules/schedules/schedules.component';
 import { ScheduleFormComponent } from './schedules/schedule-form/schedule-form.component';
+import { VendorsComponent } from './vendors/vendors/vendors.component';
+import { VendorFormComponent } from './vendors/vendor-form/vendor-form.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { ScheduleFormComponent } from './schedules/schedule-form/schedule-form.c
     EventRegistrationsComponent,
     UserRegistrationsComponent,
     SchedulesComponent,
-    ScheduleFormComponent
+    ScheduleFormComponent,
+    VendorsComponent,
+    VendorFormComponent
   ],
   imports: [
     BrowserModule,
